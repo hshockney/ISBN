@@ -1,7 +1,7 @@
-def isbn_checker(any_string)
-  if any_string.length==10
+def isbn_checker(book_number)
+  if book_number.length==10
     true
-  elsif any_string.length==13
+  elsif book_number.length==13
     true
   else
     false
