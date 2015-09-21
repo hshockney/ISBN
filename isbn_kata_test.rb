@@ -8,6 +8,10 @@ results=isbn_checker("1234567892")
 assert_equal(true,results)
 end
 
+def test_for_thirteen_digits
+results=isbn_checker("1234567891234")
+assert_equal(true,results)
+end
 
 
 
