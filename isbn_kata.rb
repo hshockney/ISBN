@@ -1,63 +1,69 @@
-def isbn_checker(book_number)
- book_number
-  book_number_array
-  remove_spaces_from_isbn(book_number_array)
-  remove_dashes_from_isbn(book_number_array)
-  length_verifier(book_number_array)
-  multiply_each_digit_by_its_position_if_10_digits(book_number_array)
-end
-
-def book_number
-  book_number= book_number.to_s
-end
-
-def book_number_array
-  book_number_array=book_number.split(//)
-  []<<book_number_array
-end
+ def isbn_checker(book_number)
+   no_spaces_book_number= remove_spaces_from_isbn(book_number)
+   no_dashes_or_spaces_book_number= remove_dashes_from_isbn(no_spaces_book_number) 
+   if length_verifier(no_dashes_or_spaces_book_number)==true
+    isbn_array=book_number_array(no_dashes_or_spaces_book_number)
+	check_digit_valid_10(isbn_array)
+	else
+	false
+  end
+ end
  
  
-def length_verifier(book_number_array)
-  if book_number_array.length==10
+def length_verifier(book_number)
+  if book_number.length==10
     true
-  elsif book_number_array.length==13
+  elsif book_number.length==13
     true
   else
     false
   end
   end
+  
+ def book_number_array(book_number)
+  book_number_array=book_number.split(//,)
+
+end
 
 def remove_dashes_from_isbn(book_number_array)
   if book_number_array.include?"-"
 	book_number_array.delete!"-"
-	else
-	true
+	
+	
   end
   end
 
-def remove_spaces_from_isbn(book_number_array)
-  if book_number_array.include?" "
-     book_number_array.delete!" "
-	 else
-	 true
-  end
-  end
+ def remove_spaces_from_isbn(book_number_array)
+   if book_number_array.include?" "
+      book_number_array.delete!" "
+	 
+	 
+   end
+   end
   
- def multiply_each_digit_by_its_position_if_10_digits(book_number_array)
-   sum=0
-   while book_number_array.length==10
-   book_number_array.each do |value,index_position|
-   sum += value*(index_position+1)
-   until index_position==[9]
-   book_number_array=sum % 11
- if 
-  book_number_array[9]==sum % 11
-  true
- else
-  false 
-  puts"Not valid ISBN number"
+  # def book_number_array(book_number)
+  # book_number_array=book_number.split(//,)
+# book_number_array(book_number)
+# end
+
+  def check_digit_valid_10(isbn_array)
+    new_array=[]
+	isbn_array.each {|value|
+	new_array<< value.to_i}
+	
+	
+	sum=0
+     new_array.each.with_index do|value,index|
+	 break if index ==9
+	 sum += (value*(index+1))
+	 
+	 check_digit= sum%11
+	 if check_digit==new_array[9]
+	 true
+	 else
+	 false
+	 end
+	 end
  end
- end
- end
- end
- end
+  
+ 
