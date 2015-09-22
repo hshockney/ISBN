@@ -1,44 +1,57 @@
-def isbn_checker(book_number)
-  
-  remove_spaces_from_isbn(book_number)
-  remove_dashes_from_isbn(book_number)
-  length_verifier(book_number)
-  #multiply_each_digit_by_its_position_if_10_digits(book_number)
+def isbn_checker
+  book_number_array(book_number)
+  remove_spaces_from_isbn(book_number_array)
+  remove_dashes_from_isbn(book_number_array)
+  length_verifier(book_number_array)
+  multiply_each_digit_by_its_position_if_10_digits(book_number_array)
 end
 
-def length_verifier(book_number)
-  if book_number.length==10
+def book_number_array(book_number)
+  book_number_array()==book_number.split(//)
+  []<<book_number_array
+end
+ 
+ 
+def length_verifier(book_number_array)
+  if book_number_array.length==10
     true
-  elsif book_number.length==13
+  elsif book_number_array.length==13
     true
   else
     false
   end
   end
 
-def remove_dashes_from_isbn(book_number)
-  if book_number.include?"-"
-	book_number.delete!"-"
+def remove_dashes_from_isbn(book_number_array)
+  if book_number_array.include?"-"
+	book_number_array.delete!"-"
 	else
 	true
   end
   end
 
-def remove_spaces_from_isbn(book_number)
-  if book_number.include?" "
-     book_number.delete!" "
+def remove_spaces_from_isbn(book_number_array)
+  if book_number_array.include?" "
+     book_number_array.delete!" "
 	 else
 	 true
   end
   end
   
-# def multiply_each_digit_by_its_position_if_10_digits(book_number)
-# if book_number.length==10
- # book_number.split(",")
-# book_number_array=[]<< book_number.split(",")
-# book_number_array.each do |value,index_position|
-# sum= value*index_position+value*index_position+value*index_position+value*index_position+value*index_position+value*index_position+value*index_position+value*index_position+value*index_position+
-# book_number_array=sum %11
-# end
-# end
-# end
+ def multiply_each_digit_by_its_position_if_10_digits(book_number_array)
+   while book_number_array.length==10
+   book_number_array.each do |value,index_position|
+   sum = value*(index_position+1)
+   until index_position==[9]
+   book_number_array=sum %11
+ if 
+  [9]==sum%11
+  true
+ else
+  false 
+  puts"Not valid ISBN number"
+ end
+ end
+ end
+ end
+ end
