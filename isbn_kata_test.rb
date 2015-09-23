@@ -23,8 +23,8 @@ end
  end
 
    def test_for_digits_of_10_formula
-   results=isbn_checker("1231231231")
-   assert_equal(false,results)
+   results=isbn_checker("0471958697")
+   assert_equal(true,results)
    end
 
 def test_string_convert_to_array

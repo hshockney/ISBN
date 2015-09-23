@@ -26,25 +26,24 @@ def length_verifier(book_number)
 end
 
 def remove_dashes_from_isbn(book_number_array)
-  if book_number_array.include?"-"
-	book_number_array.delete!"-"
-	
-	
-  end
+ if book_number_array.include?"-"
+ no_dashes_isbn = book_number_array.delete!"-"
+ else
+ book_number_array
+ end
+
+ book_number_array
   end
 
  def remove_spaces_from_isbn(book_number_array)
    if book_number_array.include?" "
       book_number_array.delete!" "
 	 
-	 
-   end
+	 end
+	 book_number_array
    end
   
-  # def book_number_array(book_number)
-  # book_number_array=book_number.split(//,)
-# book_number_array(book_number)
-# end
+  
 
   def check_digit_valid_10(isbn_array)
     new_array=[]
