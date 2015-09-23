@@ -47,37 +47,37 @@ def remove_dashes_from_isbn(book_number_array)
   
 
   def check_digit_valid_10_math(isbn_array)
-    # new_array=[]
-	# book_number_array.each {|value|
-	# new_array<< value.to_i}
+     math_10_array=[]
+	 isbn_array.each {|value|
+	 math_10_array<< value.to_i}
 	
 	sum=0
-	if isbn_array.length==10
-	  isbn_array.each.with_index do|value,index_position|
-	break if index_position == 9
+	if math_10_array.length==10
+	  math_10_array.each.with_index do|value,index_position|
+	break if index_position == [9]
 	  sum += value*(index_position+1)
 	 end
 	 end
 	 check_digit= sum % 11
-	 if check_digit == isbn_array[9]
+	 if check_digit == math_10_array[9]
 	 true
-	 elsif
-	 check_digit==10
-	 "X"
+	  elsif
+	  check_digit==10
+	  "X"
 	 else
 	 false
 	 
  end
  end
  def check_digit_valid_13_math(isbn_array) 
-   new_array=[]
-   new_array.each{ |value|
-   new_array<<value.to_i}
+   math_13_array=[]
+   isbn_array.each{ |value|
+   math_13_array<<value.to_i}
  
  sum=0
  check_digit=0
  
- new_array.each_with_index do |value,index|
+ math_13_array.each_with_index do |value,index|
  break if index==12
        if index  %2==0
 	   sum+= value * 1
@@ -91,7 +91,7 @@ def remove_dashes_from_isbn(book_number_array)
 	  if check_digit==10
 	  check_digit=0
 	  end
-	  new_array[12]== check_digit
+	  math_13_array[12]== check_digit
 end
  
  
