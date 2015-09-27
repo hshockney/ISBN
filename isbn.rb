@@ -4,6 +4,7 @@ no_dashes_isbn = remove_dashes_from_isbn(no_spaces_isbn)
  if verify_length(no_dashes_isbn) ==true
 	isbn_array=isbn_number_array(isbn_number)
 	check_digit_10_is_valid(isbn_array)
+	check_digit_contains_X(isbn)
    check_digit_13_is_valid(isbn_array)
 else 
 	false
