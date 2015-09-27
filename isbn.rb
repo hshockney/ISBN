@@ -1,12 +1,10 @@
 def isbn_checker(isbn_number)
 no_spaces_isbn = remove_spaces_from_isbn(isbn_number)
 no_dashes_isbn = remove_dashes_from_isbn(no_spaces_isbn)
-if verify_length(no_dashes_isbn) == true 
+ if verify_length(no_dashes_isbn) ==true
 	isbn_array=isbn_number_array(isbn_number)
 	check_digit_10_is_valid(isbn_array)
-	elsif
-	isbn_array.length==13
-	check_digit_13_is_valid(isbn_array)
+   check_digit_13_is_valid(isbn_array)
 else 
 	false
 end
@@ -16,9 +14,11 @@ end
 
 def verify_length(isbn_number)
   if isbn_number.length==10
-    true
+  true
+   
   elsif isbn_number.length==13
   true
+  
   else
     false
   end
@@ -84,10 +84,10 @@ check_digit = sum%11
 	
 check_digit == array[9]
 end
-def check_digit_13_is_valid(isbn)
- isbn_number = isbn.split ""
+def check_digit_13_is_valid(isbn_array)
+ isbn_array = isbn_array.split ""
 array_13=[]
-  isbn_number.each do |value|
+  isbn_array.each do |value|
   array_13 << value.to_i
   end
   sum=0
@@ -99,15 +99,14 @@ array_13=[]
 	     sum+= value * 1
 	     else
 	    sum += value * 3
-				 
+		end	
+end		
 	  sum= sum %10
-	  check_digit=(10-sum%10)
+	  check_digit=(10-sum)
 	
 	    if check_digit==10
 	    check_digit=0
 	    end
 		array_13[12]==check_digit
 		
-		end
-		end
 		end
