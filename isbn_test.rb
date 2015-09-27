@@ -28,18 +28,7 @@ def test_for_check_digit_10
 	assert_equal(true, check_digit_10_is_valid([0,3,2,1,1,4,6,5,3,0]))
 	end
 	
-  # def test_for_everything_so_far
-   # results=isbn_checker("1231231231")
-    # results2=isbn_checker("0-321@14653-0") 	
-    # results5=isbn_checker("2334567")	
-     # assert_equal(false,results)
-	  # assert_equal(false,results2)
-	  # assert_equal(false, results5)
-    # results3=isbn_checker("0471958697")
-    # results4=isbn_checker("0-321-14653-0")  
-	  # assert_equal(true,results3)
-	  # assert_equal(true,results4)
-	 # end
+ 
 
 def test_for_x
 	assert_equal(true, check_digit_contains_X("080442957X"))
