@@ -3,14 +3,14 @@ def read_file_and_output
 	file_handle=File.open("input_isbn_file.csv","r")
 	file_name="isbn_output_test.csv"
 	file_variable=File.open(file_name, "w")
-	file_handle.each do |line|remove_dashes_from_isbn(line)|
+	file_handle.each do |isbn_number|remove_dashes_from_isbn(isbn_number)|
 	if @results==true
-	file_variable.puts line.chomp + ",valid"
+	file_variable.puts isbn_number.chomp + ",valid"
 	else
-	file_variable.puts line.chomp + ",invalid"
+	file_variable.puts isbn_number.chomp + ",invalid"
 	end
 	end
-	file_handle.close
+	
 	file_variable.close
 
 end
@@ -60,19 +60,20 @@ def verify_length(isbn_number)
  
 	isbn_number_array(isbn_number)
 	check_digit_contains_X(isbn_number_array)
-	only_numeric_characters(isbn_number_array)
+
 	check_digit_10_is_valid(isbn_number_array)
+	
   elsif isbn_number.length==13
   
   isbn_number_array(isbn_number)
   check_digit_contains_X(isbn_number_array)
-  only_numeric_characters(isbn_number_array)
+ 
   check_digit_13_is_valid(isbn_number_array)
   
   else
    false
   end
-  isbn_number_array(isbn_number)
+  
 end
 
 
@@ -81,7 +82,7 @@ end
 
 def isbn_number_array(isbn_number)
 	isbn_number_array=isbn_number.split(//)
-	check_digit_contains_X(isbn_number_array)
+	
 	end
 
 	
@@ -94,16 +95,9 @@ def check_digit_contains_X(isbn_number_array)
 	end
 	
 isbn_number_array[9] == 10
-only_numeric_characters(isbn_number_array)
+
 end
-def only_numeric_characters(isbn_number_array)
-	if isbn_number_array =~ /\D/ 
-	true
-	else
-	false
-	end
-check_digit_10_is_valid(isbn_number_array)
-end
+
 
 
 
@@ -135,7 +129,7 @@ check_digit = sum%11
 	end
 	
 check_digit == array[9]
-check_digit_13_is_valid(isbn_number_array)
+
 end
 
 def check_digit_13_is_valid(isbn_number_array)
