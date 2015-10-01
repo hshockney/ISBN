@@ -5,8 +5,8 @@ def read_file_and_output
 	file_handle=File.open("input_isbn_file.csv","r")
 	file_name="isbn_output_test.csv"
 	file_variable=File.open(file_name, "w")
-	file_handle.each do |line|
-	if isbn_checker(line)==true
+	file_handle.each do |line|remove_dashes_from_isbn(line)|
+	if @results==true
 	file_variable.puts line.chomp + ",valid"
 	else
 	file_variable.puts line.chomp + ",invalid"
