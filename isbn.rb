@@ -8,17 +8,20 @@ def isbn_checker(isbn_number)
 	no_spaces_isbn = remove_spaces_from_isbn(isbn_number)
 	no_dashes_isbn = remove_dashes_from_isbn(no_spaces_isbn)
 	verify_length(no_dashes_isbn) 
-	if isbn_array=isbn_number_array(isbn_number)==10
-	true
+	 isbn_array=isbn_number_array(isbn_number)
+	
 	check_digit_contains_X(isbn_array)
-	check_digit_10_is_valid(isbn_array)
-	elsif
-	isbn_array=isbn_number_array(isbn_number)==13
+	only_numeric_characters(isbn_array)
+	 if check_digit_10_is_valid(isbn_array)==true
 	true
-	check_digit_13_is_valid(isbn_array)
+	
+	elsif check_digit_13_is_valid(isbn_array)==true
+	true
 	else
 	false
-	end	
+	end
+	
+	
 end
 
 
@@ -71,8 +74,24 @@ def check_digit_contains_X(isbn_array)
 	end
 	
 isbn_array[9] == 10
-check_digit_10_is_valid(isbn_number)
+
 end
+def only_numeric_characters(isbn_array)
+
+i = isbn_array.join("")
+	
+ if i =~ /\D/ 
+ true
+ else
+ false
+ end
+
+end
+
+
+
+
+
 
 	
 def check_digit_10_is_valid(isbn)
@@ -102,7 +121,7 @@ check_digit == array[9]
 end
 
 def check_digit_13_is_valid(isbn_array)
- isbn_array = isbn_array.split ""
+ 
 array_13=[]
   isbn_array.each do |value|
   array_13 << value.to_i
