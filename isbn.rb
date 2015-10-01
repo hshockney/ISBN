@@ -57,10 +57,17 @@ end
 
 def verify_length(isbn_number)
   if isbn_number.length==10
- true
-   
+ 
+	isbn_number_array(isbn_number)
+	check_digit_contains_X(isbn_number_array)
+	only_numeric_characters(isbn_number_array)
+	check_digit_10_is_valid(isbn_number_array)
   elsif isbn_number.length==13
-  true
+  
+  isbn_number_array(isbn_number)
+  check_digit_contains_X(isbn_number_array)
+  only_numeric_characters(isbn_number_array)
+  check_digit_13_is_valid(isbn_number_array)
   
   else
    false
