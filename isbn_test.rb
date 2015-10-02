@@ -11,15 +11,15 @@ end
 
 
 def test_removes_dashes_from_isbn
-	assert_equal("0321146530",remove_dashes_from_isbn("0-321-14653-0"))
+	assert_equal("0321146530",remove_dashes_and_spaces_from_isbn("0-321-14653-0"))
 	end
 
 def test_removes_spaces_from_isbn_number
-	assert_equal("0321146530",remove_spaces_from_isbn("0 321 14653 0"))
+	assert_equal("0321146530",remove_dashes_and_spaces_from_isbn("0 321 14653 0"))
 	end
 
 def test_for_string_coversion
-	assert_equal(["3","4","5","7","6","5","5","6","7"],isbn_number_array("345765567"))
+	assert_equal(["3","4","5","7","6","5","5","6","7"],remove_extra_characters("345765567"))
 	end
 
 def test_for_check_digit_10

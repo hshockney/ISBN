@@ -3,7 +3,7 @@ def read_file_and_output
 	file_handle=File.open("input_isbn_file.csv","r")
 	file_name="isbn_output_test.csv"
 	file_variable=File.open(file_name, "w")
-	file_handle.each do |isbn_number|remove_dashes_from_isbn(isbn_number)|
+	file_handle.each do |isbn_number|remove_dashes_and_spaces_from_isbn(isbn_number)|
 	if @results==true
 	file_variable.puts isbn_number.chomp + ",valid"
 	else
@@ -20,7 +20,7 @@ end
 	# no_spaces_isbn = remove_spaces_from_isbn(isbn_number)
 	# no_dashes_isbn = remove_dashes_from_isbn(no_spaces_isbn)
 	# verify_length(no_dashes_isbn) 
-	 # isbn_array=isbn_number_array(isbn_number)
+	 # isbn_array=@isbn_number_array(isbn_number)
 	
 	# check_digit_contains_X(isbn_array)
 	# only_numeric_characters(isbn_array)
@@ -37,42 +37,40 @@ end
 # end
 
 
-def remove_dashes_from_isbn(isbn_number)
+def remove_dashes_and_spaces_from_isbn(isbn_number)
 	if isbn_number.include?"-"
 	isbn_number.delete!"-"
+	elsif isbn_number.include?" "
+    isbn_number.delete!" "
+	
 	else isbn_number
     end
-remove_spaces_from_isbn(isbn_number)	
+remove_extra_characters(isbn_number)	
 end
  
-
-def remove_spaces_from_isbn(isbn_number)
-    if isbn_number.include?" "
-    isbn_number.delete!" " 
-	else isbn_number	
-	end
-	verify_length(isbn_number)
+def remove_extra_characters(isbn_number)
+	@isbn_number_array = isbn_number.split ("")
+	@isbn_number_array.slice!(0)
+	@isbn_number_array.slice!(-1)
+	@isbn_number_array.slice!(-1)
+	verify_length(@isbn_number_array)
 end
 
 
 def verify_length(isbn_number)
-  if isbn_number.length==10
- 
-	isbn_number_array(isbn_number)
-	check_digit_contains_X(isbn_number_array)
-
-	check_digit_10_is_valid(isbn_number_array)
+	if isbn_number.length==10
+	check_digit_contains_X(@isbn_number_array)
+	only_numeric_characters(@isbn_number_array)
+	check_digit_10_is_valid(@isbn_number_array)
 	
-  elsif isbn_number.length==13
-  
-  isbn_number_array(isbn_number)
-  check_digit_contains_X(isbn_number_array)
- 
-  check_digit_13_is_valid(isbn_number_array)
-  
-  else
-   false
-  end
+	elsif isbn_number.length==13
+	only_numeric_characters(@isbn_number_array)
+	check_digit_13_is_valid(@isbn_number_array)
+	
+	elsif
+	isbn_number.length!=10 || isbn_number.length!=13
+	 false
+	end
   
 end
 
@@ -80,25 +78,32 @@ end
 
 	
 
-def isbn_number_array(isbn_number)
-	isbn_number_array=isbn_number.split(//)
+# def @isbn_number_array(isbn_number)
+	# @isbn_number_array=isbn_number.split("")
 	
-	end
+	# end
 
 	
 def check_digit_contains_X(isbn_number_array)
 
 
-	if isbn_number_array[9] == "x" or isbn_number_array[9] == "X"
-	isbn_number_array[9] = 10
+	if @isbn_number_array[9] == "x" or @isbn_number_array[9] == "X"
+	@isbn_number_array[9] = 10
 	
 	end
 	
-isbn_number_array[9] == 10
-
+@isbn_number_array[9] == 10
+only_numeric_characters(isbn_number_array)
 end
 
-
+def only_numeric_characters(isbn_number_array)
+	i = isbn_number_array.join("")
+	if i =~ /\D/
+	   return true 
+	else 
+	   return false
+	end
+end
 
 
 
@@ -108,7 +113,7 @@ end
 def check_digit_10_is_valid(isbn_number_array)
 array =[]
 
-	isbn_number_array.each do |value|
+	@isbn_number_array.each do |value|
 	array << value.to_i 
 	end
 	
@@ -135,7 +140,7 @@ end
 def check_digit_13_is_valid(isbn_number_array)
  
 array_13=[]
-  isbn_number_array.each do |value|
+  @isbn_number_array.each do |value|
   array_13 << value.to_i
   end
   sum=0
