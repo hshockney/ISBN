@@ -1,47 +1,26 @@
 require"csv"
+
 def read_file_and_output
-	file_handle=File.open("input_isbn_file.csv","r")
-	file_name="isbn_output_test.csv"
-	file_variable=File.open(file_name, "w")
-	file_handle.each do |isbn_number|remove_dashes_and_spaces_from_isbn(isbn_number)|
-	if @results==true
-	file_variable.puts isbn_number.chomp + ",valid"
-	else
-	file_variable.puts isbn_number.chomp + ",invalid"
-	end
-	end
+	file_old = File.open("input_isbn_file.csv","r")
+	file_name = "isbn_output_test.csv"
+	file_new = File.open(file_name, "w")
+	file_old.each do |isbn_number|remove_dashes_and_spaces_from_isbn(isbn_number)|
+		if @results == true
+		  file_new.puts isbn_number.chomp + ",valid"
+		else @results == false
+		  file_new.puts isbn_number.chomp + ",invalid"
+					end
+		end
 	
-	file_variable.close
+	file_new.close
 
 end
 
-
-# def isbn_checker(isbn_number)
-	# no_spaces_isbn = remove_spaces_from_isbn(isbn_number)
-	# no_dashes_isbn = remove_dashes_from_isbn(no_spaces_isbn)
-	# verify_length(no_dashes_isbn) 
-	 # isbn_array=@isbn_number_array(isbn_number)
-	
-	# check_digit_contains_X(isbn_array)
-	# only_numeric_characters(isbn_array)
-	 # if check_digit_10_is_valid(isbn_array)==true
-	# @results=true
-	
-	# elsif check_digit_13_is_valid(isbn_array)==true
-	# @results=true
-	# else
-	# @results=false
-	# end
-	
-	
-# end
-
-
 def remove_dashes_and_spaces_from_isbn(isbn_number)
 	if isbn_number.include?"-"
-	isbn_number.delete!"-"
+	  isbn_number.delete!"-"
 	elsif isbn_number.include?" "
-    isbn_number.delete!" "
+      isbn_number.delete!" "
 	
 	else isbn_number
     end
@@ -50,54 +29,45 @@ end
  
 def remove_extra_characters(isbn_number)
 	@isbn_number_array = isbn_number.split ("")
-	@isbn_number_array.slice!(0)
-	@isbn_number_array.slice!(-1)
-	@isbn_number_array.slice!(-1)
+	@isbn_number_array.delete_at(0)
+	@isbn_number_array.delete_at(-1)
+	@isbn_number_array.delete_at(-1)
 	verify_length(@isbn_number_array)
 end
-
-
 def verify_length(isbn_number)
-	if isbn_number.length==10
-	check_digit_contains_X(@isbn_number_array)
-	only_numeric_characters(@isbn_number_array)
-	check_digit_10_is_valid(@isbn_number_array)
-	
-	elsif isbn_number.length==13
-	only_numeric_characters(@isbn_number_array)
-	check_digit_13_is_valid(@isbn_number_array)
-	
+@isbn_number_array = isbn_number
+	if isbn_number.length == 10
+	  check_digit_contains_X(@isbn_number_array)
+	  if only_numeric_characters(@new_isbn_number) == true
+	    @results = false
+	  else
+	    check_digit_10_is_valid(@new_isbn_number)
+	  end
+	elsif isbn_number.length == 13
+	  if only_numeric_characters(@isbn_number_array)== true
+	    @results = false
+	    check_digit_13_is_valid(@isbn_number_array)
+	  end
 	elsif
-	isbn_number.length!=10 || isbn_number.length!=13
-	 false
+	  false
 	end
   
 end
-
-
-
-	
-
-# def @isbn_number_array(isbn_number)
-	# @isbn_number_array=isbn_number.split("")
-	
-	# end
-
 	
 def check_digit_contains_X(isbn_number_array)
 
 
 	if @isbn_number_array[9] == "x" or @isbn_number_array[9] == "X"
-	@isbn_number_array[9] = 10
+	  @isbn_number_array[9] = 10
 	
 	end
-	
-@isbn_number_array[9] == 10
-only_numeric_characters(isbn_number_array)
+  @new_isbn_number = isbn_number_array
+  @isbn_number_array[9] == 10
+  only_numeric_characters(isbn_number_array)
 end
 
-def only_numeric_characters(isbn_number_array)
-	i = isbn_number_array.join("")
+def only_numeric_characters(isbn_number)
+	i = isbn_number.join("")
 	if i =~ /\D/
 	   return true 
 	else 
@@ -128,9 +98,9 @@ sum = 0
 check_digit = sum%11
 
 	if check_digit == array[9]
-	@results=true
+	@results = true
 	else
-	@results=false
+	@results = false
 	end
 	
 check_digit == array[9]
@@ -139,33 +109,33 @@ end
 
 def check_digit_13_is_valid(isbn_number_array)
  
-array_13=[]
+array_13 =[]
   @isbn_number_array.each do |value|
   array_13 << value.to_i
   end
-  sum=0
-  check_digit=0
+  sum = 0
+  check_digit = 0
   array_13.each_with_index do |value,index|
   
-  break if index==12
-         if index  %2==0
-	     sum+= value * 1
+  break if index == 12
+         if index  %2 == 0
+	      sum += value * 1
 	     else
-	    sum += value * 3
+	      sum += value * 3
 		end	
 end		
-	  sum= sum %10
+	  sum = sum %10
 	  check_digit=(10-sum)
 	
-	    if check_digit==10
-	    check_digit=0
+	    if check_digit == 10
+	      check_digit = 0
 	    end
-	if	array_13[12]==check_digit
-	@results=true
+	if	array_13[12] == check_digit
+	  @results = true
 	else
-	@results=false
+	  @results = false
 	end
 		
-		end
+end
 
 read_file_and_output
