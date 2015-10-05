@@ -31,7 +31,7 @@ def test_for_check_digit_10
  
 
 def test_for_x
-	assert_equal(true, check_digit_contains_X("080442957X"))
+	assert_equal(["0", "8", "0", "4", "4", "2", "9", "5", "7", "10"], check_digit_contains_X("080442957X"))
 	end
 
 	
