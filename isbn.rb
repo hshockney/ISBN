@@ -28,26 +28,26 @@ remove_extra_characters(isbn_number)
 end
  
 def remove_extra_characters(isbn_number)
-	@isbn_number_array = isbn_number.split ("")
-	@isbn_number_array.delete_at(0)
-	@isbn_number_array.delete_at(-1)
-	@isbn_number_array.delete_at(-1)
-	@isbn_number_array=@isbn_number_array.join("")
-	verify_length(@isbn_number_array)
+	isbn_number_array = isbn_number.split ("")
+	isbn_number_array.delete_at(0)
+	isbn_number_array.delete_at(-1)
+	isbn_number_array.delete_at(-1)
+	isbn_number_array=isbn_number_array.join("")
+	verify_length(isbn_number_array)
 end
 def verify_length(isbn_number)
-@isbn_number_array = isbn_number
+isbn_number_array = isbn_number
 	if isbn_number.length == 10
-	  check_digit_contains_X(@isbn_number_array)
+	  check_digit_contains_X(isbn_number_array)
 	  if only_numeric_characters(@new_isbn_number) == true
 	    @results = false
 	  else
 	    check_digit_10_is_valid(@new_isbn_number)
 	  end
 	elsif isbn_number.length == 13
-	  if only_numeric_characters(@isbn_number_array)== true
+	  if only_numeric_characters(isbn_number_array)== true
 	    @results = false
-	    check_digit_13_is_valid(@isbn_number_array)
+	    check_digit_13_is_valid(isbn_number_array)
 	  end
 	else
 	  @results = false
@@ -56,20 +56,20 @@ def verify_length(isbn_number)
 end
 	
 def check_digit_contains_X(isbn_number_array)
-@isbn_number_array=@isbn_number_array.split ""
+isbn_number_array = isbn_number_array.split ""
 
-	if @isbn_number_array[9] == "x" or @isbn_number_array[9] == "X"
-	  @isbn_number_array[9] = 10
+	if isbn_number_array[9] == "x" or isbn_number_array[9] == "X"
+	  isbn_number_array[9] = 10
 	end
 	
-  @new_isbn_number = @isbn_number_array.join("")
- # @isbn_number_array[9] == 10
+  @new_isbn_number = isbn_number_array.join("")
+  isbn_number_array[9] == 10
   only_numeric_characters(isbn_number_array)
 end
 
-def only_numeric_characters(isbn_number)
+def only_numeric_characters(isbn_number_array)
 
-	if isbn_number =~ /\D/
+	if isbn_number_array =~ /\D/
 	   return true 
 	else 
 	   return false
@@ -82,10 +82,10 @@ end
 
 	
 def check_digit_10_is_valid(isbn_number_array)
-isbn_number_array = isbn_number_array.split ""
+isbn_number_array = isbn_number_array.split("")
 array =[]
 
-	@isbn_number_array.each do |value|
+	isbn_number_array.each do |value|
 	array << value.to_i 
 	end
 	
@@ -112,7 +112,7 @@ end
 def check_digit_13_is_valid(isbn_number_array)
  isbn_number_array = isbn_number_array.split ""
 array_13 =[]
-  @isbn_number_array.each do |value|
+  isbn_number_array.each do |value|
   array_13 << value.to_i
   end
   sum = 0
