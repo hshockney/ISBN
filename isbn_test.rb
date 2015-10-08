@@ -49,34 +49,70 @@ def test_input_string_is_a_valid_isbn4
     
 end
 
- def test_for_X_in_ISBN
-    assert_equal(true, check_digit_contains_X([1,2,3,4,5,6,7,8,9,"x"]))
-	assert_equal(false, check_digit_contains_X([1,2,3,4,5,5,5,7,8,1]))
+ def test_for_X_in_ISBN1
+    assert_equal(true, check_digit_contains_X("877195869x"))
+	
+ end
+ 
+ def test_for_X_in_ISBN2
+	assert_equal(false, check_digit_contains_X("1234555781"))
  end
 
-# def test_for_only_numeric_characters
-#   assert_equal(false, only_numeric_characters(["1","2","3","4","5","6","7","8","9","0"]))
-#   assert_equal(false, only_numeric_characters(["1","2","3","4","5","6","7","8","9","10"]))
-#   assert_equal(false, only_numeric_characters(["1","2"]))
-#   assert_equal(true, only_numeric_characters(["a","b","d","1","2","3","d","e","f","1","2","3","0"]))
-# end
-  
-# def test_for_check_digit_10
-#   assert_equal(true, check_digit_10_is_valid(["0","3","0","6","4","0","6","1","5","2"]))
-#   assert_equal(false, check_digit_10_is_valid([1,2,4,6,7,8,9,0,9,9]))
-#   assert_equal(true, check_digit_10_is_valid([0,3,2,1,1,4,6,5,3,0]))
-# end
-  
+ def test_for_non_numeric_characters1
+	assert_equal(false, test_for_numeric_characters("abd123def1230"))
+ end
 
-#  def test_for_thirteen_character_math
-#     assert_equal(true, check_digit_13_is_valid([9,7,8,0,1,5,6,0,2,7,3,2,8]))
-#     assert_equal(false, check_digit_13_is_valid([9,7,8,0,4,7,0,0,0,9,0,2,9]))
-#     assert_equal(false, check_digit_13_is_valid([1,3,4,5,6,7,8,9,1,1,1,1,2]))
-#     assert_equal(true, check_digit_13_is_valid([9,7,8,0,4,7,0,0,5,9,0,2,9]))
-#   end 
+  def test_for_test_for_non_numeric_characters2
+	assert_equal(true, test_for_numeric_characters("0471958697"))
+	
+ end
+ 
+  def test_for_test_for_non_numeric_characters3
+	assert_equal(true, test_for_numeric_characters("9780470059029"))
+	
+ end
+ 
+  def test_for_non_numeric_characters4
+	assert_equal(false, test_for_numeric_characters("47804700590b"))
+	
+ end
+   def test_for_check_digit_101
+	  assert_equal(true, valid_isbn?("877195869x"))
+	
+   end
   
+# def test_for_check_digit_1012
+	
+	# assert_equal(false, valid_isbn?("1246789099"))
+	
+ # end
+ 
+ # def test_for_check_digit_1013
+	
+	# assert_equal(true, valid_isbn?("0321146530"))
+ # end
+ 
+  # def test_for_thirteen_character_math1
+    # assert_equal(true, valid_isbn?("9780470059029"))
+
+   # end 
   
-  
+ # def test_for_thirteen_character_math2
+    
+     # assert_equal(false, valid_isbn?("9780470009029"))
+
+   # end 
+   
+ # def test_for_thirteen_character_math3
+
+     # assert_equal(false, valid_isbn?("1345678911112"))
+
+   # end 
+   
+  # def test_for_thirteen_character_math4
+
+    # assert_equal(true, valid_isbn?("9780470059029"))
+   # end 
   
   
 end
