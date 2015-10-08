@@ -49,10 +49,10 @@ def test_input_string_is_a_valid_isbn4
     
 end
 
- #def test_for_X_in_ISBN
-  #  assert_equal([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], check_digit_contains_X([1,2,3,4,5,6,7,8,9,"x"]))
-#   assert_equal([1, 2, 3, 4, 5, 5, 5, 7, 8, 1], check_digit_contains_X([1,2,3,4,5,5,5,7,8,1]))
- #end
+ def test_for_X_in_ISBN
+    assert_equal(true, check_digit_contains_X([1,2,3,4,5,6,7,8,9,"x"]))
+	assert_equal(false, check_digit_contains_X([1,2,3,4,5,5,5,7,8,1]))
+ end
 
 # def test_for_only_numeric_characters
 #   assert_equal(false, only_numeric_characters(["1","2","3","4","5","6","7","8","9","0"]))

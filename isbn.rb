@@ -116,7 +116,14 @@ no_dashes_or_spaces = no_dashes_or_spaces.split(//)
         
  end
 
-
+def check_digit_contains_X(no_dashes_or_spaces)
+no_dashes_or_spaces[9] = 10	if no_dashes_or_spaces[9] == "x" || no_dashes_or_spaces[9] == "X"
+	if no_dashes_or_spaces[9] == 10
+	true
+	else
+	false
+	end
+end
 
 
 
