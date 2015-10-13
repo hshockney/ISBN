@@ -1,42 +1,55 @@
+
+
 require"csv"
 
- # def read_file_and_output
-     # file_old = File.open("input_isbn_file.csv","r")
-     # file_name = "isbn_output_test.csv"
-     # file_new = File.open(file_name, "w")
-     # file_old.each do |line|valid_isbn?(line)|
-         # if valid_isbn_10? == true || valid_isbn_13== true 
-           # file_new.puts line.chomp + ",valid"
-         # else   
-           # file_new.puts line.chomp + ",invalid"
-                     # end
-         # end
+  def read_file_and_output
+      file_old = File.open("input_isbn_file.csv","r")
+      file_name = "isbn_output_test.csv"
+      file_new = File.open(file_name, "w")
+      file_old.each do |line|
+		is_valid_isbn = valid_isbn?(line)
+	  
+          if is_valid_isbn == true
+           file_new.puts line.chomp + ",valid"
+          else 
+		  file_new.puts line.chomp + ",invalid"
+                      end
+          end
     
-     # file_new.close
+      file_new.close
 
-#end
+end
 def valid_isbn?(any_string)
   no_dashes_or_spaces = remove_dashes_and_spaces_from_isbn(any_string)
- 
+
+		
+		
 	if no_dashes_or_spaces.length == 10
-	check_digit_contains_X(no_dashes_or_spaces)
-	test_for_numeric_characters(no_dashes_or_spaces)
-	valid_isbn_10?(no_dashes_or_spaces) 
+		no_dashes_or_spaces_array = no_dashes_or_spaces.split("")
+		check_x = change_check_digit_from_X_to_10(no_dashes_or_spaces_array)
+		if test_for_numeric_characters(check_x)== false
+		 false
+		else 
+		valid_isbn_10?(check_x) 
+		end
 	
+	elsif no_dashes_or_spaces.length == 13
+		no_dashes_or_spaces_array = no_dashes_or_spaces.split("")
+	   if  test_for_numeric_characters(no_dashes_or_spaces_array)== false
+	    false
+	   else
+		valid_isbn_13?(no_dashes_or_spaces_array)
+		end
 	else
-	no_dashes_or_spaces.length == 13
-	test_for_numeric_characters(no_dashes_or_spaces)
-	valid_isbn_13?(no_dashes_or_spaces)
-	
+		false	
+		
 	end
  
 end
 
-def valid_isbn_10?(no_dashes_or_spaces)
-    no_dashes_or_spaces = no_dashes_or_spaces.split""
-	array =[]
-
-    no_dashes_or_spaces.each do |value|
+def valid_isbn_10?(any_array)
+    array =[]
+	any_array.each do |value|
     array << value.to_i 
     end
     
@@ -55,33 +68,33 @@ check_digit = sum % 11
     else
      false
     end
-    
+   
 end
 
 
 
-def remove_dashes_and_spaces_from_isbn(isbn_number)
-    disallowed_characters = [ " ", "-"]
+def remove_dashes_and_spaces_from_isbn(any_string)
+    disallowed_characters = [ " ", "-", "\n", "\""]
     
     disallowed_characters.each do | c|
-      isbn_number.delete! c if isbn_number.include? c
+      any_string.delete! c if any_string.include? c
     end
-    isbn_number 
+    any_string
 end
 
 
 
-def verify_length(isbn_number)
-  isbn_number.length == 10 || isbn_number.length == 13
+def verify_length(no_dashes_or_spaces)
+  no_dashes_or_spaces.length == 10 || no_dashes_or_spaces.length == 13
   
 end
 
-def valid_isbn_13?(no_dashes_or_spaces)
-no_dashes_or_spaces = no_dashes_or_spaces.split(//)
+def valid_isbn_13?(array_13)
+
  
  array =[]
  
-   no_dashes_or_spaces.each do |value|
+   array_13.each do |value|
    array << value.to_i
    end
  
@@ -104,41 +117,29 @@ no_dashes_or_spaces = no_dashes_or_spaces.split(//)
      end
     
      if array[12] == check_digit
-       true
+     true
      else
       false
      end
-        
+       
  end
 
-def check_digit_contains_X(no_dashes_or_spaces)
-no_dashes_or_spaces = no_dashes_or_spaces.split(//)
-	if no_dashes_or_spaces[9] == "x" || no_dashes_or_spaces[9] == "X"
-	no_dashes_or_spaces[9] = 10
+def change_check_digit_from_X_to_10(array)
+#no_dashes_or_spaces = no_dashes_or_spaces.split(//)
+	if array[9] == "x" || array[9] == "X"
+	array[9] = "10"
 	end
-		if no_dashes_or_spaces[9] == 10
-		true
-		else
-		false
-		end
-	
+		 
+	array
 end
 
-def test_for_numeric_characters(no_dashes_or_spaces)
- 
-  begin
-    Float(no_dashes_or_spaces)
-  rescue
-    false # not numeric
+def test_for_numeric_characters(check_x)
+ new_string = check_x.to_s
+  if new_string =~ /\D/
+     false # not numeric
   else
     true # numeric
   end
+  
 end
-
-
-
-
-
-
-
-
+read_file_and_output
