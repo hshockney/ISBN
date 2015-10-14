@@ -134,8 +134,8 @@ def change_check_digit_from_X_to_10(array)
 end
 
 def test_for_numeric_characters(check_x)
- new_string = check_x.to_s
-  if new_string =~ /\D/
+# new_string = check_x.to_s
+  if check_x =~ /\D/
      false # not numeric
   else
     true # numeric
