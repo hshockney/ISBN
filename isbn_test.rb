@@ -80,28 +80,23 @@ end
 	assert_equal(false, valid_isbn?("877195x869"))
 	end
  
-  def test_for_non_numeric_characters1
-	 assert_equal(false, test_for_numeric_characters("abd123def1230"))
-  end
 
-   def test_for_non_numeric_characters2
-	 assert_equal(true, test_for_numeric_characters("0471958697"))
-	
-  end
  
-   def test_for_non_numeric_characters3
-	 assert_equal(true, test_for_numeric_characters("9780470059029"))
+ def test_for_non_numeric_characters4
+	assert_equal(false, test_for_non_numeric_characters(["4","7","8","0","4","7","0","0","5","9","0","b"]))
+end
 	
-  end
+def test_for_non_numeric_characters_in_isbn
+	assert_equal(false,test_for_non_numeric_characters(["j","j","j"," ", "j","j","j","-","j","j","j","j","j"]))
+	assert_equal(true,test_for_non_numeric_characters(["1","2","3","4","5","6","7","8","9","0","1","2","0"]))
+	assert_equal(false,test_for_non_numeric_characters(["a","b","d","1","2","3","d","e","f","1","2","3","0"]))
+   
+ end 
  
-   def test_for_non_numeric_characters4
-	 assert_equal(false, test_for_numeric_characters("47804700590b"))
+ def test_for_check_digit_101
+	 assert_equal(true, valid_isbn?("877195869x"))
 	
-  end
-   def test_for_check_digit_101
-	  assert_equal(true, valid_isbn?("877195869x"))
-	
-   end
+ end
   
  def test_for_check_digit_102
 	

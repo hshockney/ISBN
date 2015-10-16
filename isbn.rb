@@ -22,22 +22,25 @@ end
 def valid_isbn?(any_string)
   no_dashes_or_spaces = remove_dashes_and_spaces_from_isbn(any_string)
 
-		
+	no_dashes_or_spaces_array = no_dashes_or_spaces.split("")	
 		
 	if no_dashes_or_spaces.length == 10
-		no_dashes_or_spaces_array = no_dashes_or_spaces.split("")
+		#no_dashes_or_spaces_array = no_dashes_or_spaces.split("")
 		check_x = change_check_digit_from_X_to_10(no_dashes_or_spaces_array)
-		if test_for_numeric_characters(check_x)== false
+		
+		if test_for_non_numeric_characters(check_x)== false
 		 false
 		else 
+		
 		valid_isbn_10?(check_x) 
 		end
 	
 	elsif no_dashes_or_spaces.length == 13
-		no_dashes_or_spaces_array = no_dashes_or_spaces.split("")
-	   if  test_for_numeric_characters(no_dashes_or_spaces_array)== false
+	 #no_dashes_or_spaces_array = no_dashes_or_spaces.split("")
+	   if  test_for_non_numeric_characters(no_dashes_or_spaces_array)== false
 	    false
 	   else
+	  
 		valid_isbn_13?(no_dashes_or_spaces_array)
 		end
 	else
@@ -125,7 +128,7 @@ def valid_isbn_13?(array_13)
  end
 
 def change_check_digit_from_X_to_10(array)
-#no_dashes_or_spaces = no_dashes_or_spaces.split(//)
+
 	if array[9] == "x" || array[9] == "X"
 	array[9] = "10"
 	end
@@ -133,13 +136,14 @@ def change_check_digit_from_X_to_10(array)
 	array
 end
 
-def test_for_numeric_characters(check_x)
-# new_string = check_x.to_s
-  if check_x =~ /\D/
-     false # not numeric
-  else
-    true # numeric
-  end
-  
+def test_for_non_numeric_characters(check_x)
+	d = check_x.join("")
+		if d =~ /\D/ 
+			false  
+			else
+			true
+		end
+		
 end
+
 read_file_and_output
